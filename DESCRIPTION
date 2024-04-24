@@ -1,11 +1,12 @@
 Package: estatistikR
 Title: R Client für den Nachrichtenabruf vom eSTATISTIK Erhebungsportal der
-    Statistischen Ämter des Bundes und der Länder Deutschland
+    Statistischen Ämter des Bundes und der Länder Deutschlands
 Version: 0.0.0.9000
 Authors@R: 
     person("Alexander", "Bartel", email = 'alexander.bartel@lageso.berlin.de', role = c('cre','aut'), comment = c(ORCID = "0000-0002-1280-6138"))
 Description: R Client für den Nachrichtenabruf vom eSTATISTIK Erhebungsportal der
-    Statistischen Ämter des Bundes und der Länder Deutschland.
+    Statistischen Ämter des Bundes und der Länder Deutschlands. Mithilfe des R Pakets können alle Nachrichten 
+    im Postfach des eSTATISITK Erhebungsportals abgerufen und die Anhänge von einer oder mehrer Nachrichten heruntergeladen werden.
 License: MIT + file LICENSE
 URL: https://github.com/LAGeSo-Infektionsschutz-I-C-1/estatistikR
 BugReports: https://github.com/LAGeSo-Infektionsschutz-I-C-1/estatistikR/issues
