@@ -27,19 +27,19 @@ library(estatistikR)
 user_auth <- list(username = "IhrBenutzername", password = "IhrPasswort")
 
 # Abrufen aller Nachrichten im Postfach
-df_nachrichten <- get_nachrichten(user_auth  = user_auth)
+df_nachrichten <- get_nachrichten(user_auth = user_auth)
 print(df_nachrichten)
 
 # Herunterladen des Anhangs der neusten Nachricht
 df_nachrichten_downloaded <- df_nachrichten |>
   head(n = 1) |>
-  get_anhaenge_info(user_auth  = user_auth) |>
-  download_anhaenge(user_auth  = user_auth, path = ".")
+  get_anhaenge_info(user_auth = user_auth) |>
+  download_anhaenge(user_auth = user_auth, path = ".")
 print(df_nachrichten_downloaded)
 
 # Wenn der Download erfolgreich war, kann die Nachricht als gelesen markiert werden
 # Die Nachricht taucht dann über die API nicht mehr auf 
 # und wird im online Portal grau dargestellt.
 df_nachrichten |>
-  markiere_nachrichten_gelesen(user_auth  = user_auth)
+  markiere_nachrichten_gelesen(user_auth = user_auth)
 ```
