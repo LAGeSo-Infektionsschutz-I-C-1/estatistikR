@@ -11,14 +11,14 @@ get_abonnierte_themen(
 )
 }
 \arguments{
-\item{user_auth}{Eine Liste mit den eSTATISTIK Benutzerdaten list(username, password). Das
+\item{user_auth}{Eine Liste mit den eSTATISTIK Benutzerdaten: \code{list(username = "", password = "")}. Das
 Passwort wird nachgefragt, wenn es leergelassen wird. Dadurch kann das Speichern des Passworts
 im R Skript umgangen werden.}
 
 \item{verbosity}{Default: 0. Detaillevel der Debug Informationen (0 bis 3).}
 
 \item{basis_url}{Die URL des eSATISTIK Erhebungsportals.
-Default: https://erhebungsportal.estatistik.de/Erhebungsportal}
+Default: \url{https://erhebungsportal.estatistik.de/Erhebungsportal}}
 }
 \value{
 Gibt die abonnierten Themen zurück.

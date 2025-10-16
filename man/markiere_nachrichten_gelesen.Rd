@@ -14,14 +14,14 @@ markiere_nachrichten_gelesen(
 \arguments{
 \item{nachrichten_df}{DataFrame der Nachrichten von \code{\link[=get_nachrichten]{get_nachrichten()}}.}
 
-\item{user_auth}{Eine Liste mit den eSTATISTIK Benutzerdaten list(username, password). Das
+\item{user_auth}{Eine Liste mit den eSTATISTIK Benutzerdaten: \code{list(username = "", password = "")}. Das
 Passwort wird nachgefragt, wenn es leergelassen wird. Dadurch kann das Speichern des Passworts
 im R Skript umgangen werden.}
 
 \item{verbosity}{Default: 0. Detaillevel der Debug Informationen (0 bis 3).}
 
 \item{basis_url}{Die URL des eSATISTIK Erhebungsportals.
-Default: https://erhebungsportal.estatistik.de/Erhebungsportal}
+Default: \url{https://erhebungsportal.estatistik.de/Erhebungsportal}}
 }
 \value{
 Gibt eine Liste der API responses zurück.
@@ -36,9 +36,8 @@ user_auth <- list(username = "IhrBenutzername")
 user_auth <- list(username = "IhrBenutzername", password = "IhrPasswort")
 
 # Die älteste Nachricht als gelesen markieren
-df_nachrichten <- get_nachrichten(user_auth  = user_auth) |>
+df_nachrichten <- get_nachrichten(user_auth = user_auth) |>
   tail(n = 1) |>
-  markiere_nachrichten_gelesen(user_auth  = user_auth)
-
+  markiere_nachrichten_gelesen(user_auth = user_auth)
 }
 }

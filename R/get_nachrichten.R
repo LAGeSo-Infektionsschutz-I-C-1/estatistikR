@@ -5,7 +5,7 @@
 #' im R Skript umgangen werden.
 #' @param verbosity Default: 0. Detaillevel der Debug Informationen (0 bis 3).
 #' @param basis_url Die URL des eSATISTIK Erhebungsportals.
-#' Default: [https://erhebungsportal.estatistik.de/Erhebungsportal]
+#' Default: <https://erhebungsportal.estatistik.de/Erhebungsportal>
 #' @return `get_nachrichten` gibt ein DataFrame der Nachrichten zurück.
 #' `get_nachrichten_raw` gibt das HTTP-Response-Objekt zurück.
 #' @examples
@@ -20,11 +20,9 @@
 #' @export
 
 get_nachrichten <- function(
-  user_auth = list(username = NA, password = NA),
-  verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    user_auth = list(username = NA, password = NA),
+    verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   # R CMD CHECK glücklich machen
   versanddatum <- NULL
 
@@ -36,8 +34,10 @@ get_nachrichten <- function(
     httr2::resp_body_json() |>
     purrr::map_dfr(
       \(x) {
-        purrr::keep(x,
-                    names(x) %in% c("id", "betreff", "thema", "versanddatum", "absender", "anzahlAnhaenge")) |>
+        purrr::keep(
+          x,
+          names(x) %in% c("id", "betreff", "thema", "versanddatum", "absender", "anzahlAnhaenge")
+        ) |>
           purrr::modify_at("thema", list) |>
           tibble::as_tibble()
       }
@@ -48,11 +48,9 @@ get_nachrichten <- function(
 #' @export
 #' @rdname get_nachrichten
 get_nachrichten_raw <- function(
-  user_auth = list(username = NA, password = NA),
-  verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    user_auth = list(username = NA, password = NA),
+    verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   # Erzeugt die vollständige URL für den Endpunkt
   url <- paste0(basis_url, "/ws/sda/nachrichten")
 

@@ -7,7 +7,7 @@
 #' im R Skript umgangen werden.
 #' @param verbosity Default: 0. Detaillevel der Debug Informationen (0 bis 3).
 #' @param basis_url Die URL des eSATISTIK Erhebungsportals.
-#' Default: [https://erhebungsportal.estatistik.de/Erhebungsportal]
+#' Default: <https://erhebungsportal.estatistik.de/Erhebungsportal>
 #' @return Gibt die abonnierten Themen zurück.
 #' @examples
 #' \dontrun{
@@ -20,11 +20,9 @@
 #' @export
 
 get_abonnierte_themen <- function(
-  user_auth = list(username = "", password = NULL),
-  verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    user_auth = list(username = "", password = NULL),
+    verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   # Erzeugt die vollständige URL für den Endpunkt
   url <- paste0(basis_url, "/ws/sda/themen")
 

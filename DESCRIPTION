@@ -1,7 +1,7 @@
 Package: estatistikR
 Title: R Client für den Nachrichtenabruf vom eSTATISTIK Erhebungsportal der
     Statistischen Ämter des Bundes und der Länder Deutschlands
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
     person("Alexander", "Bartel", email = 'alexander.bartel@lageso.berlin.de', role = c('cre','aut'), comment = c(ORCID = "0000-0002-1280-6138"))
 Description: R Client für den Nachrichtenabruf vom eSTATISTIK Erhebungsportal der
@@ -10,6 +10,7 @@ Description: R Client für den Nachrichtenabruf vom eSTATISTIK Erhebungsportal d
 License: MIT + file LICENSE
 URL: https://github.com/LAGeSo-Infektionsschutz-I-C-1/estatistikR
 BugReports: https://github.com/LAGeSo-Infektionsschutz-I-C-1/estatistikR/issues
+Depends:
     R (>= 4.2.0)
 Imports: 
     dplyr,
@@ -24,4 +25,4 @@ Suggests:
 Encoding: UTF-8
 Language: de-DE
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

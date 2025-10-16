@@ -7,7 +7,7 @@
 #' im R Skript umgangen werden.
 #' @param verbosity Default: 0. Detaillevel der Debug Informationen (0 bis 3).
 #' @param basis_url Die URL des eSATISTIK Erhebungsportals.
-#' Default: [https://erhebungsportal.estatistik.de/Erhebungsportal]
+#' Default: <https://erhebungsportal.estatistik.de/Erhebungsportal>
 #' @return `get_anhaenge_info` gibt ein DataFrame der Nachrichten mit den IDs der Anhänge zurück.
 #' @examples
 #' \dontrun{
@@ -24,28 +24,22 @@
 #' @export
 #' @rdname anhaenge
 get_anhaenge_info <- function(
-  nachrichten_df, user_auth, verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    nachrichten_df, user_auth, verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   # R CMD CHECK glücklich machen
-  id <- anzahlAnhaenge <- anhang <- anhang_1 <- NULL
+  id <- anzahlAnhaenge <- anhang <- NULL
 
   nachrichten_df |>
     dplyr::mutate(anhang = purrr::map2(id, anzahlAnhaenge, .get_anhang,
-                                       user_auth = user_auth, verbosity = verbosity, basis_url = basis_url)) |>
+      user_auth = user_auth, verbosity = verbosity, basis_url = basis_url
+    )) |>
     tidyr::unnest_wider(anhang, names_sep = "_") |>
-    dplyr::select(-anhang_1)
+    tidyr::unnest(cols = tidyr::starts_with("anhang_"))
 }
 
 .get_anhang <- function(
-  nachrichten_id, anzahlAnhaenge, user_auth, verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
-  # 0 oder 2+ Anhänge nicht implementiert, weil kann nicht getestet werden
-  if (anzahlAnhaenge != 1) return(NA)
-
+    nachrichten_id, anzahlAnhaenge, user_auth, verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   url <- glue::glue(basis_url, "/ws/sda/nachrichten", "/{nachrichten_id}/anhaenge")
 
   result <- httr2::request(url) |>
@@ -54,11 +48,9 @@ get_anhaenge_info <- function(
 
   out <- result |>
     httr2::resp_body_json() |>
-    # Nimm nur den ersten Anhang (s.o.)
-    purrr::pluck(1)
+    purrr::map_dfr(tibble::as_tibble)
 
   return(out)
-
 }
 
 #' @export
@@ -67,26 +59,28 @@ get_anhaenge_info <- function(
 #' @return `download_anhaenge` gibt ein DataFrame der Nachrichten mit Speicherort und Größe der Anhänge zurück.
 #' @importFrom utils object.size
 download_anhaenge <- function(
-  nachrichten_df, path = "out/", user_auth, verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
+    nachrichten_df, path = "out", user_auth, verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
+  if (!dir.exists(path)) dir.create(path)
 
   out <- nachrichten_df |>
     split(seq_len(nrow(nachrichten_df))) |>
-    purrr::map_dfr(.download_anhang, user_auth = user_auth, path = path,
-                   verbosity = verbosity, basis_url = basis_url)
+    purrr::map_dfr(.download_anhang,
+      user_auth = user_auth, path = path,
+      verbosity = verbosity, basis_url = basis_url
+    )
 
   return(out)
 }
 
 .download_anhang <- function(
-  nachrichten_df, user_auth, path, verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    nachrichten_df, user_auth, path, verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   # DataFrame sollte genau eine Nachricht beinhalten, nicht mehr oder weniger
   if (is.null(nachrichten_df) || !is.data.frame(nachrichten_df) ||
-        nrow(nachrichten_df) != 1) return(NULL)
+      nrow(nachrichten_df) != 1) {
+        return(NULL)
+  }
 
   # Kein Anhang zum herunterladen
   if (is.null(nachrichten_df$anhang_id) || is.na(nachrichten_df$anhang_id)) {
@@ -132,5 +126,4 @@ download_anhaenge <- function(
     )
 
   return(out)
-
 }

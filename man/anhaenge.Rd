@@ -14,7 +14,7 @@ get_anhaenge_info(
 
 download_anhaenge(
   nachrichten_df,
-  path = "out/",
+  path = "out",
   user_auth,
   verbosity = 0,
   basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
@@ -23,19 +23,21 @@ download_anhaenge(
 \arguments{
 \item{nachrichten_df}{DataFrame der Nachrichten von \code{\link[=get_nachrichten]{get_nachrichten()}}.}
 
-\item{user_auth}{Eine Liste mit den eSTATISTIK Benutzerdaten list(username, password). Das
+\item{user_auth}{Eine Liste mit den eSTATISTIK Benutzerdaten: \code{list(username = "", password = "")}. Das
 Passwort wird nachgefragt, wenn es leergelassen wird. Dadurch kann das Speichern des Passworts
 im R Skript umgangen werden.}
 
 \item{verbosity}{Default: 0. Detaillevel der Debug Informationen (0 bis 3).}
 
 \item{basis_url}{Die URL des eSATISTIK Erhebungsportals.
-Default: https://erhebungsportal.estatistik.de/Erhebungsportal}
+Default: \url{https://erhebungsportal.estatistik.de/Erhebungsportal}}
 
 \item{path}{Pfad des Ordners indem die heruntergeladenen Anhänge gespeichert werden sollen.}
 }
 \value{
 \code{get_anhaenge_info} gibt ein DataFrame der Nachrichten mit den IDs der Anhänge zurück.
+
+\code{download_anhaenge} gibt ein DataFrame der Nachrichten mit Speicherort und Größe der Anhänge zurück.
 }
 \description{
 Anhänge von eSTATISTIK Nachrichten abrufen und herunterladen
@@ -46,9 +48,9 @@ user_auth <- list(username = "IhrBenutzername")
 # oder
 user_auth <- list(username = "IhrBenutzername", password = "IhrPasswort")
 
-df_nachrichten <- get_nachrichten(user_auth  = user_auth) |>
-  get_anhaenge_info(user_auth  = user_auth) |>
-  download_anhaenge(user_auth  = user_auth, path = ".")
+df_nachrichten <- get_nachrichten(user_auth = user_auth) |>
+  get_anhaenge_info(user_auth = user_auth) |>
+  download_anhaenge(user_auth = user_auth, path = ".")
 print(df_nachrichten)
 }
 }

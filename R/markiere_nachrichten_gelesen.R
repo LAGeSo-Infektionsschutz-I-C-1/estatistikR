@@ -9,7 +9,7 @@
 #' im R Skript umgangen werden.
 #' @param verbosity Default: 0. Detaillevel der Debug Informationen (0 bis 3).
 #' @param basis_url Die URL des eSATISTIK Erhebungsportals.
-#' Default: [https://erhebungsportal.estatistik.de/Erhebungsportal]
+#' Default: <https://erhebungsportal.estatistik.de/Erhebungsportal>
 #' @return Gibt eine Liste der API responses zurück.
 #' @examples
 #' \dontrun{
@@ -21,16 +21,13 @@
 #' df_nachrichten <- get_nachrichten(user_auth = user_auth) |>
 #'   tail(n = 1) |>
 #'   markiere_nachrichten_gelesen(user_auth = user_auth)
-#'
 #' }
 
 #' @export
 
 markiere_nachrichten_gelesen <- function(
-  nachrichten_df, user_auth = user_auth, verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    nachrichten_df, user_auth = user_auth, verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   # R CMD CHECK glücklich machen
   id <- NULL
 
@@ -42,10 +39,8 @@ markiere_nachrichten_gelesen <- function(
 }
 
 .mark_as_read <- function(
-  nachrichten_id, user_auth, verbosity = 0,
-  basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal"
-) {
-
+    nachrichten_id, user_auth, verbosity = 0,
+    basis_url = "https://erhebungsportal.estatistik.de/Erhebungsportal") {
   url <- glue::glue(basis_url, "/ws/sda/nachrichten/{nachrichten_id}")
 
   response <- httr2::request(url) |>
