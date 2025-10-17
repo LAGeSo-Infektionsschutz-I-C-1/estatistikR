@@ -18,7 +18,7 @@ devtools::install_github("LAGeSo-Infektionsschutz-I-C-1/estatistikR")
 
 ## Benutzung
 
-Mithilfe des R Pakets können alle Nachrichten im Postfach des eSTATISITK Erhebungsportals abgerufen und die Anhänge von einer oder mehrer Nachrichten heruntergeladen werden:
+Mithilfe des R Pakets können alle Nachrichten im Postfach des eSTATISITK Erhebungsportals abgerufen und die Anhänge von einer oder mehrerer Nachrichten heruntergeladen werden:
 
 ``` r
 library(estatistikR)
